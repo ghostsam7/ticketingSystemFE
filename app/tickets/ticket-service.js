@@ -4,7 +4,7 @@ ticketService.factory('ticketAPIservice', function($http) {
 
   var ticketAPI = {}
   var ticketUrl = {
-    'endpoint': "http://127.0.0.1:9000/api/"
+    'endpoint': "https://ticketingsystembe.herokuapp.com/api/"
   }
 
   ticketAPI.getTicket = function() {
