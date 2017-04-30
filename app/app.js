@@ -3,12 +3,11 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+  'ui.router',
+  'ticket'
+]).config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/tickets');
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+});
+
+var apiUrl = "https://ticketingsystembe.herokuapp.com/api"
