@@ -61,7 +61,29 @@ ticketService.factory('ticketAPIservice', function($http) {
     return $http({
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      url: ticketUrl.endpoint
+      url: ticketUrl.endpoint + "ticket/",
+      transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+      data: params
+    })
+  }
+
+  ticketAPI.postCustomerDetail = function(params) {
+    return $http({
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      url: ticketUrl.endpoint+ "customer/",
+      transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+      data: params
     })
   }
 

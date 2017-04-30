@@ -54,12 +54,18 @@ ticketController.controller('ticketDetailCtrl', function($state, $scope, ticketA
 ticketController.controller('ticketCreateCtrl', function($state, $scope, ticketAPIservice){
 
   $scope.ticketModel = {};
+  $scope.customerModel = {};
+  var customer = $scope.customerModel;
   var params = $scope.ticketModel;
 
   $scope.createNewTicket = function(){
-    ticketAPIservice.postTicketDetail(params).success(function(response, status) {
-      console.log('created successfully');
-    });
+    customer.contact = "+91" + $scope.customerModel.contact;
+    ticketAPIservice.postCustomerDetail(customer).success(function(response, status) {
+      params.customer = response.id;
+      ticketAPIservice.postTicketDetail(params).success(function(response, status) {
+        console.log('created successfully');
+      });
+    })
   };
 
 });
