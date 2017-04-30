@@ -1,18 +1,22 @@
-<div>ticket List</div>
 
 <div class="table-responsive">
     <table class="table table-hover table-striped">
       <thead>
               <tr>
-                <th>Id</th>
-                <th>Title</th>
+                <th>#</th>
+                <th>Tickets</th>
+                <th>status</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="ticket in ticketList" style="cursor: pointer" ng-click="gotoTicketDetail(ticket.id, ticket.title)">
                 <td>{{ticket.id ? ticket.id : 'N/A'}}</td>
                 <td>{{ticket.title ? ticket.title : 'N/A'}}</td>
-                <td >Setting<span> </span><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></td>
+                <td>
+                  <button ng-if="ticket.status=='a'" class="status btn-primary btn btn-default btn-xs">assigned</button>
+                  <button ng-if="ticket.status=='c'" class="status btn-success btn btn-default btn-xs">closed</button>
+                  <button ng-if="ticket.status=='o'" class="status btn-danger btn btn-default btn-xs">open</button>
+                </td>
               </tr>
             </tbody>
     </table>

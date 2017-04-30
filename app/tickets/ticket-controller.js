@@ -17,8 +17,37 @@ ticketController.controller('ticketCtrl', function($state, $scope, ticketAPIserv
 ticketController.controller('ticketDetailCtrl', function($state, $scope, ticketAPIservice, $stateParams) {
 
   var id = $stateParams.id;
+  $scope.staffModel = {};
+
   ticketAPIservice.getTicketDetail(id).success(function(response, status) {
     $scope.ticketDetail = response;
+    ticketAPIservice.getClientDetail(response.customer).success(function(response, status) {
+      $scope.clientDetail = response;
+    });
+    if (response.staff != null) {
+      ticketAPIservice.getStaffDetail(response.staff).success(function(response, status) {
+        $scope.staffDetail = response;
+      });
+    }
+    else{
+      ticketAPIservice.getStaff().success(function(response, status) {
+        $scope.staffList = response;
+        console.log($scope.staffList);
+      });
+    }
+    var params = $scope.ticketDetail;
+
+    $scope.assignTo = function(obj){
+      params.staff = obj.id;
+      params.status = "a";
+      console.log(params);
+      ticketAPIservice.resolveTicket(id, params);
+    };
+    $scope.solved = function(){
+      params.resolved = true;
+      params.status = 'c';
+      ticketAPIservice.resolveTicket(id, params);
+    };
   });
 });
 

@@ -1,4 +1,29 @@
-<div>ticket Detail</div>
-{{ticketDetail.id}}</br>
-{{ticketDetail.title}}</br>
-{{ticketDetail.description}}
+<div class="panel panel-default">
+  <div class="panel-body panelbody">
+    <button ng-if="ticketDetail.staff != null && ticketDetail.resolved==false" style="float:right" class="status btn-success btn btn-default" ng-click="solved()">Solved</button>
+    <h4>ticket #{{ticketDetail.id}}: {{ticketDetail.title}}</h4>
+    <div class="well desc">{{ticketDetail.description}}</div>
+    <div class="row">
+      <div class="author">
+        <ul>
+          <li>client: {{clientDetail.name}}</li>
+          <li>{{clientDetail.email}}</li>
+          <li>{{clientDetail.contact}}</li>
+      </div>
+      <form ng-if="ticketDetail.status!='c'" class="form-horizontal">
+
+          <div class="form-group">
+           <label ng-if="staffDetail==null" class="control-label col-sm-2" for="selectCategory">assign to:</label>
+           <div class="col-sm-4">
+              <select ng-if="staffDetail==null" placeholder="staff"
+               ng-options="option.name for option in staffList track by option.id"
+                ng-model="staffModel.id" class="form-control custom-form-control" required>
+              </select></br>
+              <button ng-if="staffModel.id!=null" class="status btn-primary btn btn-default" ng-click="assignTo(staffModel.id)">confirm</button>
+              <button ng-if="staffDetail!=null" class="status btn-primary btn btn-default btn-xs" style="width: 200px; margin-left:100px">assigned to {{staffDetail.name}}</button>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,25 +1,29 @@
 /* app css stylesheet */
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+.content{
+  margin-top: 80px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
-.menu:before {
-  content: "[";
+.status{
+  width: 100px;
 }
 
-.menu:after {
-  content: "]";
+.panelbody{
+  padding: 20px;
 }
 
-.menu > li {
-  display: inline;
+.desc{
+  height: 200px;
 }
 
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+.author{
+  float: left;
+}
+.author li{
+  display: block;
+}
+.resbut{
+  float: right;
 }
