@@ -1,10 +1,9 @@
 var ticketController = angular.module('ticket.controllers', []);
 
-ticketController.controller('ticketCtrl', function($state, $scope, ticketAPIservice) {
+ticketController.controller('ticketCtrl', function($state, $scope, ticketAPIservice, $http) {
 
   ticketAPIservice.getTicket().success(function(response, status) {
     $scope.ticketList = response;
-    console.log(response);
   });
 
   $scope.gotoTicketDetail = function(id, title) {
