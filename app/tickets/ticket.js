@@ -9,7 +9,7 @@ ticketApp.config(function($stateProvider, $urlRouterProvider){
     })
 
     .state('create',{
-      url: '/tickets/create',
+      url: '/create',
       templateUrl: 'tickets/templates/ticket-create.html',
       controller: 'ticketCreateCtrl'
     })
