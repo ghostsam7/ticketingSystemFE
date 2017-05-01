@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-8">
-            <button type="submit" class="btn btn-primary" ng-click="createNewTicket()">Submit</button>
+            <button ng-class="{'disabled': customerModel.contact.length!=10}" type="submit" class="btn btn-primary" ng-click="createNewTicket()">Submit</button>
           </div>
         </div>
       </form>

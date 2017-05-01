@@ -5,8 +5,9 @@ angular.module('myApp', [
   'ngRoute',
   'ui.router',
   'ticket'
-]).config(function($stateProvider, $urlRouterProvider) {
+]).config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/tickets');
+    $locationProvider.hashPrefix('!');
 
 });
 

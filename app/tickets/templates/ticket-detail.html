@@ -1,6 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-body panelbody">
     <button ng-if="ticketDetail.staff != null && ticketDetail.resolved==false" style="float:right" class="status btn-success btn btn-default" ng-click="solved()">Solved</button>
+    <button ng-if="ticketDetail.status=='c'" class="status btn-success btn btn-default btn-xs" style="width: 200px; margin-left:100px; float:right">resolved by {{staffDetail.name}}</button>
     <h4>ticket #{{ticketDetail.id}}: {{ticketDetail.title}}</h4>
     <div class="well desc">{{ticketDetail.description}}</div>
     <div class="row">
