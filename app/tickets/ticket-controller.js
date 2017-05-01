@@ -8,7 +8,6 @@ ticketController.controller('ticketCtrl', function($state, $scope, ticketAPIserv
 
   $scope.gotoTicketDetail = function(id, title) {
     $state.go('detail',{id: id, title: title});
-    console.log("it's ticket detail");
   };
 
 });
@@ -62,6 +61,7 @@ ticketController.controller('ticketCreateCtrl', function($state, $scope, ticketA
     ticketAPIservice.postCustomerDetail(customer).then(function(response) {
       params.customer = response.data.id;
       ticketAPIservice.postTicketDetail(params).then(function(response) {
+        $state.go('ticket');
         console.log('created thenfully');
       });
     })
