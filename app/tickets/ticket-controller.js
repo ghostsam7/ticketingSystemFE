@@ -1,9 +1,9 @@
 var ticketController = angular.module('ticket.controllers', []);
 
-ticketController.controller('ticketCtrl', function($state, $scope, ticketAPIservice, $http) {
+ticketController.controller('ticketCtrl', function($state, $scope, ticketAPIservice) {
 
-  ticketAPIservice.getTicket().success(function(response, status) {
-    $scope.ticketList = response;
+  ticketAPIservice.getTicket().then(function(response) {
+    $scope.ticketList = response.data;
   });
 
   $scope.gotoTicketDetail = function(id, title) {
@@ -18,19 +18,19 @@ ticketController.controller('ticketDetailCtrl', function($state, $scope, ticketA
   var id = $stateParams.id;
   $scope.staffModel = {};
 
-  ticketAPIservice.getTicketDetail(id).success(function(response, status) {
-    $scope.ticketDetail = response;
-    ticketAPIservice.getClientDetail(response.customer).success(function(response, status) {
-      $scope.clientDetail = response;
+  ticketAPIservice.getTicketDetail(id).then(function(response) {
+    $scope.ticketDetail = response.data;
+    ticketAPIservice.getClientDetail(response.data.customer).then(function(response) {
+      $scope.clientDetail = response.data;
     });
-    if (response.staff != null) {
-      ticketAPIservice.getStaffDetail(response.staff).success(function(response, status) {
-        $scope.staffDetail = response;
+    if (response.data.staff != null) {
+      ticketAPIservice.getStaffDetail(response.data.staff).then(function(response) {
+        $scope.staffDetail = response.data;
       });
     }
     else{
-      ticketAPIservice.getStaff().success(function(response, status) {
-        $scope.staffList = response;
+      ticketAPIservice.getStaff().then(function(response) {
+        $scope.staffList = response.data;
         console.log($scope.staffList);
       });
     }
@@ -59,10 +59,10 @@ ticketController.controller('ticketCreateCtrl', function($state, $scope, ticketA
 
   $scope.createNewTicket = function(){
     customer.contact = "+91" + $scope.customerModel.contact;
-    ticketAPIservice.postCustomerDetail(customer).success(function(response, status) {
-      params.customer = response.id;
-      ticketAPIservice.postTicketDetail(params).success(function(response, status) {
-        console.log('created successfully');
+    ticketAPIservice.postCustomerDetail(customer).then(function(response) {
+      params.customer = response.data.id;
+      ticketAPIservice.postTicketDetail(params).then(function(response) {
+        console.log('created thenfully');
       });
     })
   };
